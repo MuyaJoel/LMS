@@ -2,6 +2,9 @@ import { PrismaClient } from "@prisma/client";
 import { validationResult, matchedData } from "express-validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const prisma = new PrismaClient();
 
@@ -140,23 +143,40 @@ export const deleteUser = async (req, res) => {
 
 //login
 export const loginUser = async (req, res) => {
-  const { userEmail, userPassword } = req;
-
   const data = matchedData(req);
 
-  const psd = await bcrypt.compare(data.password, userPassword);
+  const user = await prisma.Users.findUnique({
+    where: { email: data.email },
+  });
 
-  if (userEmail && psd) {
-    const token = jwt.sign({ email: userEmail }, secretKey, {
-      expiresIn: "5s",
+  if (!user) return res.sendStatus(401);
+
+  const psd = await bcrypt.compare(data.password, user.password);
+
+  if (user.email && psd) {
+    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET_KEY, {
+      expiresIn: "1h",
+    });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      signed: true,
+      maxAge: 24 * 60 * 60 * 1000,
     });
     res.status(200).json({
       status: "success",
       data: { token },
+      message: "Logged in Successfully",
     });
   } else {
     res.status(401).json({
       message: "Invalid credentials",
     });
   }
+};
+
+//logout user
+export const logoutUser = (req, res) => {
+  res.clearCookie("token");
+  res.send({ message: "Logged out successfully" });
 };

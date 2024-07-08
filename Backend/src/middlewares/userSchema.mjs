@@ -9,6 +9,9 @@ const userSchema = {
     },
   },
   email: {
+    isEmail: {
+      errorMessage: 'Invalid email format',
+    },
     notEmpty: {
       errorMessage: "email can't be empty",
     },

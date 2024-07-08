@@ -1,5 +1,6 @@
 import express from "express";
 import { checkSchema } from "express-validator";
+import loginSchema from "../middlewares/loginSchema.mjs";
 import userSchema from "../middlewares/userSchema.mjs";
 import resolveIndex from "../middlewares/userValidation.mjs";
 import courseSchema from "../middlewares/courseSchema.mjs";
@@ -14,6 +15,7 @@ import {
   patchUser,
   deleteUser,
   loginUser,
+  logoutUser,
 } from "../controllers/usersController.mjs";
 
 import {
@@ -34,7 +36,10 @@ router.patch("/user/:id", resolveIndex, checkSchema(userSchema), patchUser);
 router.delete("/user/:id", resolveIndex, deleteUser);
 
 //user login
-router.post("/user/login/",checkSchema(userSchema),resolveIndex,authenticateJWT,loginUser)
+router.post("/user/login/",checkSchema(loginSchema), loginUser)
+
+//user logout
+router.post("/user/logout/",checkSchema(loginSchema),logoutUser)
 
 //courses
 router.get("/course/", authorizeRoles('instructor','student'),getCourses);
