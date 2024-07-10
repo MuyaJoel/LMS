@@ -13,23 +13,49 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users{
-  id Int @id @default(autoincrement())
-  name String
-  email String @unique
-  password String
-  role String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum Roles{
+  student
+  instructor
+  admin
 }
 
-model Courses{
-  id Int @id @default(autoincrement())
-  title String
-  description String
-  instructor String
-  email String
-  content String
+model Users {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      Roles
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  assignments Assignments[] @relation("UsersAssignments")
+}
+
+model Courses {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  instructor  String
+  email       String
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  assignments Assignments[] @relation("CoursesAssignments")
+}
+
+model Assignments {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  fileUrl     String
+  uploadDate  DateTime @default(now())
+  courseId    Int
+  userId      Int
+
+  course Courses @relation("CoursesAssignments", fields: [courseId], references: [id])
+  user   Users   @relation("UsersAssignments", fields: [userId], references: [id])
+
+  @@index([courseId])
+  @@index([userId])
 }
