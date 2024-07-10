@@ -1,4 +1,5 @@
 import express from "express";
+import multer from "multer";
 import { checkSchema } from "express-validator";
 import loginSchema from "../middlewares/loginSchema.mjs";
 import userSchema from "../middlewares/userSchema.mjs";
@@ -25,32 +26,40 @@ import {
   deleteCourse,
 } from "../controllers/coursesControllers.mjs";
 
+import { createAssignment, getAllAssignments, getAssignmentById } from "../controllers/assignmentsContollers.mjs";
+
 const router = express.Router();
 
 //users
-router.get("/user/", getUsers);
-router.post("/user/", checkSchema(userSchema), createUser);
-router.get("/user/:id", resolveIndex, checkSchema(userSchema), getUserById);
-router.put("/user/:id", resolveIndex, checkSchema(userSchema), updateUser);
-router.patch("/user/:id", resolveIndex, checkSchema(userSchema), patchUser);
-router.delete("/user/:id", resolveIndex, deleteUser);
+router.get("/users/", getUsers);
+router.post("/users/", checkSchema(userSchema), createUser);
+router.get("/users/:id", resolveIndex, checkSchema(userSchema), getUserById);
+router.put("/users/:id", resolveIndex, checkSchema(userSchema), updateUser);
+router.patch("/users/:id", resolveIndex, checkSchema(userSchema), patchUser);
+router.delete("/users/:id", resolveIndex, deleteUser);
 
 //user login
-router.post("/user/login/",checkSchema(loginSchema), loginUser)
+router.post("/users/login/",checkSchema(loginSchema), loginUser)
 
 //user logout
-router.post("/user/logout/",checkSchema(loginSchema),logoutUser)
+router.post("/users/logout/",checkSchema(loginSchema),logoutUser)
 
 //courses
-router.get("/course/", authorizeRoles('instructor','student'),getCourses);
-router.post("/course/",checkSchema(courseSchema), authorizeRoles('instructor'), createCourse);
+router.get("/courses/",getCourses);
+router.post("/courses/",checkSchema(courseSchema), authorizeRoles('instructor'), createCourse);
 router.get(
-  "/course/:id",
-  authorizeRoles('instructor','student'),
+  "/courses/:id",
   resolveCourseIndex,
   checkSchema(courseSchema),
   getCourse
 );
-router.delete("/course/:id", authorizeRoles('instructor'), resolveCourseIndex, deleteCourse);
+router.delete("/courses/:id", authorizeRoles('instructor'), resolveCourseIndex, deleteCourse);
+
+//assignments
+const upload=multer({dest: 'uploads/'})
+
+router.post('/upload',upload.single('file'),createAssignment)
+router.get('/assignments',getAllAssignments)
+router.get('/assignments/:id',getAssignmentById)
 
 export default router;
