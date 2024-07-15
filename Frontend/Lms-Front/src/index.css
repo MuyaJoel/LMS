@@ -1,0 +1,57 @@
+*{
+    background-color: bisque;
+}
+div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ul{
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    align-items: center;
+    text-decoration: dashed;
+    list-style: none;
+}
+ul li{
+    border: 1px solid brown;
+    border-radius: 5px;
+    border-color: burlywood;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+ul li:hover{
+    background-color: aqua;
+    color: brown;
+    cursor: pointer;
+}
+label{
+    font-family: sans-serif;
+    font-size: 20px;
+}
+input{
+    border-top: none;
+    border-right: none;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+button{
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+    background-color: brown;
+    font-family: sans-serif;
+    font-family: 10px;
+}
+button:hover{
+    background-color: aliceblue;
+    color: red;
+    cursor: pointer;
+}
+.courses{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+}

@@ -8,9 +8,8 @@ export const getCourses = async (req, res) => {
   const courses = await prisma.Courses.findMany();
   try {
     console.log(courses)
-    return res.status(200).json({
-      status: "Success",
-      data: { courses },
+    return res.status(200).json({ 
+      courses
     });
   } catch (error) {
     res.status(500).json({
