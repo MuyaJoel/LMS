@@ -26,7 +26,7 @@ const Register = () => {
 
   return (
     <div>
-      <h2>Register</h2>
+      <h2>Register to @LearnCoding! </h2>
       <form onSubmit={handleSubmit}>
         <label>Name:</label> <br />
         <input

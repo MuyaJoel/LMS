@@ -6,6 +6,11 @@ div{
     flex-direction: column;
     align-items: center;
 }
+img{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+}
 ul{
     display: flex;
     flex-direction: row;

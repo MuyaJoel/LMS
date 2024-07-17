@@ -16,21 +16,24 @@ const Login = () => {
       const response = await axios.post(
         "http://127.0.0.1:3000/api/users/login",
         { email, password },
-        {withCredentials: true}
+        { withCredentials: true }
       );
-      localStorage.setItem('token',response.data.token)
+      localStorage.setItem("token", response.data.token);
       setUser(response.data);
-      navigate('/home');
+      navigate("/home");
       setMessage("Login successful");
-      // Handle storing token or user information as needed
     } catch (error) {
-      setMessage("Login failed!...register");
+      setMessage(`Login failed!...register first!!! `);
     }
   };
 
   return (
     <div>
-      <h2>Login</h2>
+      <img
+        src="https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?cs=srgb&amp;dl=pexels-pixabay-159866.jpg&amp;fm=jpg"
+        alt="Book Image"
+      />
+      <h2>Login to @LearnCoding! </h2>
       <form onSubmit={handleSubmit}>
         <label>Email:</label>
         <br />
@@ -48,14 +51,18 @@ const Login = () => {
           type="password"
           value={password}
           placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e)=> setPassword(e.target.value)}
           required
         />{" "}
-        <br /> <br />
+        <p>
+          <Link>forgot passord</Link>
+        </p>{" "}
+        
         <button type="submit">Login</button>
-      </form> <br />
-      <p><Link>forgot passord</Link></p>
-      <p>Not a User: <Link to="/register">click to register</Link> </p>
+      </form>{" "}
+      <p>
+        Not a User: <Link to="/register">click to register</Link>{" "}
+      </p>
       {message && <p>{message}</p>}
     </div>
   );

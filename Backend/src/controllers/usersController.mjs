@@ -150,12 +150,13 @@ export const loginUser = async (req, res) => {
   });
 
   if (!user) return res.sendStatus(401);
-
+  
   const psd = await bcrypt.compare(data.password, user.password);
+  
 
   if (user.email && psd) {
     const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET_KEY, {
-      expiresIn: "1h",
+      expiresIn: "1m",
     });
 
     res.cookie("token", token, {
