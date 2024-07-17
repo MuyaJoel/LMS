@@ -26,7 +26,11 @@ import {
   deleteCourse,
 } from "../controllers/coursesControllers.mjs";
 
-import { createAssignment, getAllAssignments, getAssignmentById } from "../controllers/assignmentsContollers.mjs";
+import {
+  createAssignment,
+  getAllAssignments,
+  getAssignmentById,
+} from "../controllers/assignmentsContollers.mjs";
 
 const router = express.Router();
 
@@ -39,27 +43,37 @@ router.patch("/users/:id", resolveIndex, checkSchema(userSchema), patchUser);
 router.delete("/users/:id", resolveIndex, deleteUser);
 
 //user login
-router.post("/users/login/",checkSchema(loginSchema), loginUser)
+router.post("/users/login/", checkSchema(loginSchema), loginUser);
 
 //user logout
-router.post("/users/logout/",checkSchema(loginSchema),logoutUser)
+router.post("/users/logout/", checkSchema(loginSchema), logoutUser);
 
 //courses
-router.get("/courses/",getCourses);
-router.post("/courses/",checkSchema(courseSchema), authorizeRoles('instructor'), createCourse);
+router.get("/courses/", getCourses);
+router.post(
+  "/courses/",
+  checkSchema(courseSchema),
+  authorizeRoles("instructor"),
+  createCourse
+);
 router.get(
   "/courses/:id",
   resolveCourseIndex,
   checkSchema(courseSchema),
   getCourse
 );
-router.delete("/courses/:id", authorizeRoles('instructor'), resolveCourseIndex, deleteCourse);
+router.delete(
+  "/courses/:id",
+  authorizeRoles("instructor"),
+  resolveCourseIndex,
+  deleteCourse
+);
 
 //assignments
-const upload=multer({dest: 'uploads/'})
+const upload = multer({ dest: "uploads/" });
 
-router.post('/upload',upload.single('file'),createAssignment)
-router.get('/assignments',getAllAssignments)
-router.get('/assignments/:id',getAssignmentById)
+router.post("/upload", upload.single("file"), createAssignment);
+router.get("/assignments", getAllAssignments);
+router.get("/assignments/:id", getAssignmentById);
 
 export default router;

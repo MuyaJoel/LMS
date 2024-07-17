@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import NavBar from '../NavBar';
 
 const CreateCourse = () => {
   const [title, setTitle] = useState('');
@@ -28,6 +29,7 @@ const CreateCourse = () => {
 
   return (
     <div>
+      <NavBar/>
       <h2>Register New Course</h2>
       <form onSubmit={handleSubmit}>
           <label>Title:</label> <br />

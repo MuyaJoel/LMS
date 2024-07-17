@@ -37,7 +37,7 @@ export const createAssignment = async (req, res) => {
 export const getAllAssignments = async (req, res) => {
   try {
     const assignments = await prisma.Assignments.findMany();
-    res.status(200).json(assignments);
+    res.status(200).json({assignments});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -56,7 +56,7 @@ export const getAssignmentById = async (req, res) => {
       return res.status(404).json({ message: "Assignment not found" });
     }
 
-    res.status(200).json(assignment);
+    res.status(200).json({assignment});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

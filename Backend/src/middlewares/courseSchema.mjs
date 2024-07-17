@@ -34,10 +34,10 @@ const courseSchema = {
   },
     email: {
       notEmpty: {
-        errorMessage: "content can't be empty",
+        errorMessage: "email can't be empty",
       },
       isString: {
-        errorMessage: "content must be String",
+        errorMessage: "email must be String",
       },
     }
 };

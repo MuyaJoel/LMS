@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import getCourses from "../../services/courseService.mjs";
 import axios from "axios";
+import NavBar from "../NavBar";
 
 const CourseList = () => {
   const [courses, setCourses] = useState([]);
@@ -33,7 +34,8 @@ const CourseList = () => {
 
   return (
     <>
-    <h2>Courses</h2>
+    <NavBar/>
+    <h2>Welcome, View Our Courses page!!</h2>
     <div>
      
       {courses.length > 0 ? (

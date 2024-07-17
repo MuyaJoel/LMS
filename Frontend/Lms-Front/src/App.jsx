@@ -12,19 +12,19 @@ import Login from "./components/pages/Login";
 import Home from "./components/pages/Home";
 import DashBoard from "./components/pages/CourseListPage";
 import CreateCoursePage from "./components/pages/CreateCoursePage";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./components/auth/PrivateRoute";
 import NavBar from "./components/NavBar";
 import Logout from "./components/pages/Logout";
+import Hom from "./components/pages/Hom";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <div>
-          
-          <NavBar />
 
           <Routes>
+            <Route path="/" element={<Hom/>}/>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route element={<PrivateRoute />}>
