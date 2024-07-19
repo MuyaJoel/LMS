@@ -150,26 +150,34 @@ export const loginUser = async (req, res) => {
   });
 
   if (!user) return res.sendStatus(401);
-  
+
   const psd = await bcrypt.compare(data.password, user.password);
-  
 
   if (user.email && psd) {
-    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET_KEY, {
-      expiresIn: "1m",
-    });
+    const token = jwt.sign(
+      { email: user.email, id: user.id },
+      process.env.JWT_SECRET_KEY,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     res.cookie("token", token, {
       httpOnly: true,
       signed: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'Strict',
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
       maxAge: 24 * 60 * 60 * 1000,
     });
     res.status(200).json({
       status: "success",
-      data: { token },
       message: "Logged in Successfully",
+      data: {
+        token,
+        user,
+      },
+      token,
+      user,
     });
   } else {
     res.status(401).json({
@@ -182,4 +190,22 @@ export const loginUser = async (req, res) => {
 export const logoutUser = (req, res) => {
   res.clearCookie("token");
   res.send({ message: "Logged out successfully" });
+};
+
+//userProfile
+export const getUserProfile = async (req, res) => {
+  try {
+    const user = await prisma.Users.findUnique({
+      where: { id: req.user.id },
+      select: { id: true, name: true, email: true },
+    });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json({
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
 };

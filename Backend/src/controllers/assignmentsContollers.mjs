@@ -5,7 +5,7 @@ import fs from "fs";
 const prisma = new PrismaClient();
 
 // Create a new assignment
-export const createAssignment = async (req, res) => {
+export const submitAssignment = async (req, res) => {
   try {
     const { title, description, courseId, userId } = req.body;
     const file = req.file;
@@ -27,6 +27,7 @@ export const createAssignment = async (req, res) => {
     });
 
     res.status(201).json(newAssignment);
+    console.log("assignment submitted")
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

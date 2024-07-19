@@ -17,6 +17,7 @@ import {
   deleteUser,
   loginUser,
   logoutUser,
+  getUserProfile,
 } from "../controllers/usersController.mjs";
 
 import {
@@ -27,9 +28,9 @@ import {
 } from "../controllers/coursesControllers.mjs";
 
 import {
-  createAssignment,
   getAllAssignments,
   getAssignmentById,
+  submitAssignment,
 } from "../controllers/assignmentsContollers.mjs";
 
 const router = express.Router();
@@ -44,6 +45,9 @@ router.delete("/users/:id", resolveIndex, deleteUser);
 
 //user login
 router.post("/users/login/", checkSchema(loginSchema), loginUser);
+
+//userProfile
+router.get("/users/me", authenticateJWT, getUserProfile);
 
 //user logout
 router.post("/users/logout/", checkSchema(loginSchema), logoutUser);
@@ -72,7 +76,7 @@ router.delete(
 //assignments
 const upload = multer({ dest: "uploads/" });
 
-router.post("/upload", upload.single("file"), createAssignment);
+router.post("/upload", upload.single("file"), submitAssignment);
 router.get("/assignments", getAllAssignments);
 router.get("/assignments/:id", getAssignmentById);
 

@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
         })
         .catch(error => {
           console.error('Error fetching user data', error);
-          Cookies.remove('token'); // Remove invalid token
+          Cookies.remove('token'); 
         })
         .finally(() => {
           setLoading(false);
