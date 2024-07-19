@@ -1,10 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 
 const Login = () => {
-  const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,11 +16,15 @@ const Login = () => {
         { email, password },
         { withCredentials: true }
       );
+      // const { token, user } = response.data;
       localStorage.setItem("token", response.data.token);
-      setUser(response.data);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      console.log(response.data.user);
+
       navigate("/home");
-      setMessage("Login successful");
+      setMessage(`Logging Successfully..!!!`);
     } catch (error) {
+      localStorage.removeItem("token");
       setMessage(`Login failed!...register first!!! `);
     }
   };
@@ -51,13 +53,12 @@ const Login = () => {
           type="password"
           value={password}
           placeholder="password"
-          onChange={(e)=> setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />{" "}
         <p>
           <Link>forgot passord</Link>
         </p>{" "}
-        
         <button type="submit">Login</button>
       </form>{" "}
       <p>

@@ -41,6 +41,8 @@ input{
     margin-top: 20px;
     margin-bottom: 10px;
     border-radius: 5px;
+    width: 250px;
+    height: 20px;
 }
 button{
     border-radius: 10px;
@@ -55,8 +57,16 @@ button:hover{
     color: red;
     cursor: pointer;
 }
-.courses{
+courses{
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 10px;
+}
+form{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    background-color: antiquewhite;
+    transform: 0.5em ease;
 }

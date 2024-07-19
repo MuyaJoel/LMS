@@ -43,6 +43,7 @@ const CourseList = () => {
         <ul>
           {courses.map((course) => (
             <li key={course.id}>
+              <p>Id:{course.id}</p>
               <h3>{course.title}</h3>
               <p>{course.description}</p>
               <p>

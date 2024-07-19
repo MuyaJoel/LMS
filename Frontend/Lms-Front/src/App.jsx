@@ -16,21 +16,22 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 import NavBar from "./components/NavBar";
 import Logout from "./components/pages/Logout";
 import Hom from "./components/pages/Hom";
+import Assignments from "./components/pages/Assignments";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <div>
-
           <Routes>
-            <Route path="/" element={<Hom/>}/>
+            <Route path="/" element={<Hom />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route element={<PrivateRoute />}>
               <Route path="/home" element={<Home />} />
               <Route path="/dashboard" element={<DashBoard />} />
               <Route path="/newcourse" element={<CreateCoursePage />} />
+              <Route path="/assignment" element={<Assignments />} />
             </Route>
           </Routes>
         </div>
