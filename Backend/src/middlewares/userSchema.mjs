@@ -1,4 +1,4 @@
-const userSchema = {
+export const userSchema = {
   //Users schema
   name: {
     notEmpty: {
@@ -10,7 +10,7 @@ const userSchema = {
   },
   email: {
     isEmail: {
-      errorMessage: 'Invalid email format',
+      errorMessage: "Invalid email format",
     },
     notEmpty: {
       errorMessage: "email can't be empty",
@@ -35,7 +35,29 @@ const userSchema = {
     isString: {
       errorMessage: "role must be string",
     },
-  }
+  },
 };
 
-export default userSchema;
+ export const patchSchema = {
+  email: {
+    isEmail: {
+      errorMessage: "Invalid email format",
+    },
+    notEmpty: {
+      errorMessage: "email can't be empty",
+    },
+    isString: {
+      errorMessage: "email must be string",
+    },
+  },
+  password: {
+    notEmpty: {
+      errorMessage: "password can't be empty",
+    },
+    isLength: {
+      options: { min: 5, max: 12 },
+      errorMessage: "password must be between 5 and 12 characters",
+    },
+  },
+};
+

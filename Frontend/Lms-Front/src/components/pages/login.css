@@ -1,0 +1,25 @@
+
+
+.form-container{
+    /* height: 100%; */
+    display:  flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+form{
+    width: 600px;
+    padding: 20px;
+    border-radius: 20px;
+
+}
+
+label{
+    color: #10892a;
+}
+span{
+    color: brown;
+    font-size: 40px;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+}

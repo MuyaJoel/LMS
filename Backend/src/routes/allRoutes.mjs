@@ -2,7 +2,7 @@ import express from "express";
 import multer from "multer";
 import { checkSchema } from "express-validator";
 import loginSchema from "../middlewares/loginSchema.mjs";
-import userSchema from "../middlewares/userSchema.mjs";
+import { userSchema, patchSchema } from "../middlewares/userSchema.mjs";
 import resolveIndex from "../middlewares/userValidation.mjs";
 import courseSchema from "../middlewares/courseSchema.mjs";
 import resolveCourseIndex from "../middlewares/courseValidation.mjs";
@@ -40,7 +40,7 @@ router.get("/users/", getUsers);
 router.post("/users/", checkSchema(userSchema), createUser);
 router.get("/users/:id", resolveIndex, checkSchema(userSchema), getUserById);
 router.put("/users/:id", resolveIndex, checkSchema(userSchema), updateUser);
-router.patch("/users/:id", resolveIndex, checkSchema(userSchema), patchUser);
+router.patch("/users/update", checkSchema(patchSchema), patchUser);
 router.delete("/users/:id", resolveIndex, deleteUser);
 
 //user login

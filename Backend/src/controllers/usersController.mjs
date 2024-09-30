@@ -100,9 +100,10 @@ export const patchUser = async (req, res) => {
   const data = matchedData(req);
 
   try {
+    const hashpsd= await bcrypt.hash(data.password, 10)
     //check is the user exists
     const existingUser = await prisma.Users.findUnique({
-      where: { id: parseId },
+      where: { email: data.email },
     });
 
     if (!existingUser) {
@@ -114,8 +115,8 @@ export const patchUser = async (req, res) => {
 
     //Update the user data
     const updatedUser = await prisma.Users.update({
-      where: { id: parseId },
-      data: { ...data },
+      where: { email: data.email },
+      data: { ...data, password: hashpsd },
     });
 
     console.log("User Updated");

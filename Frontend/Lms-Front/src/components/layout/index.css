@@ -1,0 +1,123 @@
+nav {
+  margin: 5px;
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 80%;
+  position: static;
+}
+footer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: #f8f9fa;
+  padding: 20px;
+  gap: 10px;
+}
+.div-left,
+.div-middle,
+.div-right {
+  background-color: beige;
+  border: 1px solid bisque;
+  border-radius: 10px;
+  padding: 20px;
+}
+.div-left:hover,
+.div-middle:hover,
+.div-right:hover {
+  background-color: darkseagreen;
+  box-shadow: 3px 5px 5px 3px #66a3f1;
+}
+.div-links {
+  display: flex;
+  justify-content: space-between;
+}
+a:hover {
+  color: brown;
+}
+.div-links a {
+  display: block;
+  margin: 5px 0;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.div-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 20px;
+  padding: 20px;
+}
+
+.div-links a:hover,
+.div-sidebar a:hover {
+  text-decoration: underline;
+  color: brown;
+}
+
+@media (max-width: 600px) {
+  .container-fluid {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1px;
+    
+  }
+
+  footer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .div-left,
+  .div-middle,
+  .div-right {
+    margin: 10px 0;
+  }
+
+  .div-links {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+  }
+  .div-middle p h3{
+    font-size: 10px;
+  }
+}
+
+/* Styles for medium devices (tablets) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  footer {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .div-left,
+  .div-middle,
+  .div-right {
+    margin: 10px 5px;
+  }
+
+  .div-links {
+    align-items: flex-start;
+  }
+}
+
+/* Styles for large devices (desktops) */
+@media (min-width: 1025px) {
+  footer {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .div-left,
+  .div-middle,
+  .div-right {
+    margin: 0 20px;
+  }
+
+  .div-links {
+    align-items: flex-start;
+  }
+}

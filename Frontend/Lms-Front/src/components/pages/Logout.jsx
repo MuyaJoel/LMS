@@ -8,6 +8,6 @@ const Logout = () => {
     localStorage.removeItem("user");
     navigate("/login");
   };
-  return <button onClick={handleLogout}>Logout</button>;
+  return <button onClick={handleLogout} className="btn btn-primary">Logout</button>;
 };
 export default Logout;
