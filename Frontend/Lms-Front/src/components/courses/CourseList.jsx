@@ -37,7 +37,7 @@ const CourseList = () => {
       <div className="d-flex justify-content-center">
         <h2>Welcome, View Our Courses page!!</h2>
       </div>
-      <div className="d-flex justify-content-between" spaci>
+      <div className="d-flex justify-content-between" >
         {courses.length > 0 ? (
           <div>
             <SimpleGrid
